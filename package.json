@@ -1,0 +1,14 @@
+{
+  "name": "stl-viewer",
+  "version": "1.0.0",
+  "description": "A simple WebGL-based STL viewer web application designed for Chromium and Firefox. This project provides an interactive 3D canvas where users can upload and explore STL models directly in the browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shinbatsu",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^3.6.2"
+  }
+}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STL Viewer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico" />
+  </head>
+  <body>
+    <noscript>
+      <p>
+        Your browser does not support JavaScript or it is disabled. The STL
+        viewer requires JavaScript to function.
+      </p>
+    </noscript>
+
+    <main>
+      <canvas
+        id="c"
+        width="800"
+        height="600"
+        role="img"
+        aria-label="3D STL Model Viewer"
+      ></canvas>
+
+      <section class="ui" id="fileprompt" aria-hidden="true" hidden>
+        <p>Choose STL file to upload</p>
+        <p id="filename" aria-live="polite"></p>
+        <button
+          type="button"
+          class="ui"
+          id="browse"
+          aria-label="Browse STL files"
+        >
+          Browse files
+        </button>
+        <button
+          type="button"
+          class="ui"
+          id="ok"
+          aria-label="Confirm file selection"
+        >
+          Ok
+        </button>
+      </section>
+
+      <div
+        class="ui"
+        id="menutoggle"
+        role="button"
+        tabindex="0"
+        aria-pressed="false"
+        aria-label="Toggle menu"
+      ></div>
+
+      <nav class="ui" id="animatedmenu" aria-label="Camera controls menu">
+        <div id="menu">
+          <p>Camera Mode</p>
+          <div
+            id="cammode"
+            role="radiogroup"
+            aria-label="Camera mode selection"
+          >
+            <button
+              type="button"
+              class="ui selected"
+              id="orbitmode"
+              role="radio"
+              aria-checked="true"
+            >
+              Orbit
+            </button>
+            <button
+              type="button"
+              class="ui"
+              id="freemode"
+              role="radio"
+              aria-checked="false"
+            >
+              Free
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div id="arrow" aria-hidden="true"></div>
+    </main>
+  </body>
+</html>

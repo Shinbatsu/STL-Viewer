@@ -9,19 +9,32 @@ uniform vec4 ambient;
 varying lowp vec4 lighting;
 
 void main() {
-    gl_Position = worldViewMatrix * modelMatrix * vec4(pos, 1);
-    vec3 norm = normalize(mat3(modelMatrix) * normal);
-    vec4 diffuse = vec4(vec3(max(dot(norm, -lightDir), 0.0)), 1.0);
-    lighting = ambient + diffuse;
-}`;
+    // Вычисляем позицию вершины
+    gl_Position = worldViewMatrix * modelMatrix * vec4(pos, 1.0);
 
-const fragmentShaderSrc = `uniform lowp vec4 color;
+    // Трансформируем нормаль и нормализуем
+    vec3 norm = normalize(mat3(modelMatrix) * normal);
+
+    // Вычисляем диффузное освещение (Lambert)
+    float diff = max(dot(norm, normalize(-lightDir)), 0.0);
+    vec4 diffuse = vec4(vec3(diff), 1.0);
+
+    // Итоговое освещение — сумма амбиентного и диффузного
+    lighting = ambient + diffuse;
+}
+`;
+
+const fragmentShaderSrc = `precision mediump float;
+
+uniform vec4 color;
 
 varying lowp vec4 lighting;
 
 void main() {
+    // Умножаем базовый цвет на освещение
     gl_FragColor = color * lighting;
-}`;
+}
+`;
 
 window.addEventListener('load', () => {
   const requestAnimationFrame =
@@ -86,9 +99,15 @@ window.addEventListener('load', () => {
       false,
       new Float32Array(model.mat.transpose().mat)
     );
+
+    // Свет направлен вдоль оси Z в сторону камеры
     gl.uniform3f(uniformLocations.lightDir, 0, 0, -1);
+
+    // Амбиентное освещение — слабый свет, равномерный
     gl.uniform4f(uniformLocations.ambient, 0.2, 0.2, 0.2, 1);
-    gl.uniform4f(uniformLocations.color, 1, 0, 0, 1);
+
+    // Серый цвет базового материала (0.5,0.5,0.5)
+    gl.uniform4f(uniformLocations.color, 0.5, 0.5, 0.5, 1);
 
     if (vertexArray.indices) {
       gl.drawElements(

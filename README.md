@@ -2,6 +2,8 @@
 
 A simple WebGL-based STL viewer web application designed for Chromium and Firefox. This project provides an interactive 3D canvas where users can upload and explore STL models directly in the browser.
 
+![Preview](img/preview.png)
+
 ## Overview
 
 - The viewer displays 3D models inside an HTML5 `<canvas>` element with accessible ARIA labels.
